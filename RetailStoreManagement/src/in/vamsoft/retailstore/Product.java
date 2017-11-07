@@ -1,4 +1,5 @@
 package in.vamsoft.retailstore;
+
 /* 
  * @project name:Retail store Management.
  * @Date :07-nov-2017
@@ -9,9 +10,10 @@ public class Product {
   String productName;
   int quatity;
   double productPrice;
-/* 
- * constructor name is product initializes the values.
- */
+
+  /*
+   * constructor name is product initializes the values.
+   */
   public Product(int productID, String productName, int quatity, double productPrice) {
     super();
     this.productID = productID;
@@ -19,9 +21,10 @@ public class Product {
     this.quatity = quatity;
     this.productPrice = productPrice;
   }
-/* 
- * initializes getter and setter method.
- */
+
+  /*
+   * initializes getter and setter method.
+   */
   public int getProductID() {
     return productID;
   }
