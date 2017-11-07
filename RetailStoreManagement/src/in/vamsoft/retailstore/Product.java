@@ -10,6 +10,8 @@ public class Product {
   String productName;
   int quatity;
   double productPrice;
+  String status;
+
 
   /*
    * constructor name is product initializes the values.
@@ -21,6 +23,13 @@ public class Product {
     this.quatity = quatity;
     this.productPrice = productPrice;
   }
+
+  
+  public Product() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
+
 
   /*
    * initializes getter and setter method.
@@ -55,6 +64,15 @@ public class Product {
 
   public void setProductPrice(double productPrice) {
     this.productPrice = productPrice;
+  }
+  
+  public String getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
 }
