@@ -4,10 +4,17 @@ public class Customer {
   int customerID;
   String customerName;
   int contactNumber;
+  public static int cid = 2;
 
   public Customer() {
     super();
     // TODO Auto-generated constructor stub
+  }
+
+  public void addCustomer(String customerName, int contactNumber) {
+    Customer c = new Customer(cid, customerName, contactNumber);
+    cid++;
+
   }
 
   public Customer(int customerID, String customerName, int contactNumber) {
@@ -46,6 +53,5 @@ public class Customer {
     return "Customer [customerID=" + customerID + ", customerName=" + customerName + ", contactNumber=" + contactNumber
         + "]";
   }
-  
 
 }

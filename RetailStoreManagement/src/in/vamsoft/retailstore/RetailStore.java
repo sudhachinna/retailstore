@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import java.io.IOException;
 
 public class RetailStore implements RetailsDAO, AutoCloseable {
@@ -25,7 +24,8 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
     super();
     this.storeName = storeName;
   }
-  public static int cid=1;
+
+  public static int cid = 2;
 
   public void addCustomer(String name, int contactNo) {
 
@@ -42,16 +42,15 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
     }
 
   }
-  
-  public static int pid=1;
-  
-  public void addProduct(String name,String status,double price,long quantity) {
+
+  public static int pid = 1;
+
+  public void addProduct(String productName, double productPrice, int quantity) {
     try (PreparedStatement statement = con.prepareStatement("insert into product values(?,?,?,?)");) {
       statement.setInt(1, pid++);
-      statement.setString(2, name);
-      statement.setString(3, status);
-      statement.setDouble(4, price);
-      statement.setLong(5, quantity);
+      statement.setString(2, productName);
+      statement.setDouble(3, productPrice);
+      statement.setInt(4, quantity);
 
       int rowsUpdated = statement.executeUpdate();
 
@@ -61,33 +60,32 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
     }
 
   }
-  
 
   public int checkProductAvailability(String productName) {
-    try (PreparedStatement pst = con.prepareStatement("select * from empcopy where empid=?");) {
+    try (PreparedStatement pst = con.prepareStatement("select * from product where p_name=?");) {
       pst.setString(1, productName);
       rs = pst.executeQuery();
-      Product pdct = null;
-      
-      if (rs.next()) {
-        pdct = new Product();
-        pdct.setQuatity(rs.getInt(4));
 
-      
+      int avaiable = 0;
+      if (rs.next()) {
+
+        avaiable = rs.getInt(4);
+
       } else {
         throw new Exception("Product with code" + productName + "not found");
       }
-     
-    }catch(Exception e) {
+      return avaiable;
+
+    } catch (Exception e) {
       e.printStackTrace();
     }
     return 0;
-    
+
   }
 
   public int bookProduct(int customerID, String ProductName, int qtyOfProduct) {
 
-   return 1;
+    return 1;
   }
 
   public double calculateNetAmount(int customerID, double Discount) {
@@ -99,4 +97,5 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
     // TODO Auto-generated method stub
 
   }
+
 }

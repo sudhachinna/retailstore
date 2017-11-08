@@ -13,7 +13,7 @@ public class JdbcDaoConnection {
 
   public static Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
     FileReader reader = new FileReader("/home/vamsoft/Desktop/db.properties");
-    Properties prop = new Properties();
+    Properties prop = new Properties();    
     prop.load(reader);
     String driver = prop.getProperty("driver");
     String url = prop.getProperty("url");
