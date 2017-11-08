@@ -1,0 +1,41 @@
+					Run Application
+
+		1.DataBase:Oracle
+		2.IDE:Eclipse	
+		3.Add required jars(ojdbc,junit).
+		4.Run as Java Application.
+		5.Run MainClassTest.java file.
+		6.Enter options for 1 or 2 for customer or retailer view
+		7.(i):Choose option 1.addcustomer 2.addproduct 3.checkProduct 4.bookproduct
+		8:1)Will add customer details
+			i)Enter the Customer Id
+			ii)Enter the Customer Name
+			iii)Enter the Contact No
+		9.2)To get all product booked by customer
+			i)Enter the Product Name
+			ii)Enter the Product Price
+			iii)Enter the Product Quantity
+		10.3)Will checkProduct
+			i)Enter the Product Name
+		11.4)For book product
+			(i).Enter an Customer id for add an product.
+		  (ii)Enter name of Product.
+		  (iii)Enter Quantity.
+		  (iv)if quantity is less product can added.
+		   (v)else product is added.
+
+		-----------------------------------------------------------------------------------
+		10:3)To get all product booked by customer
+		11:(ii):1.Add Customer 2.Add Product 3.Check Availability
+		 1.(i).Enter no of customer to added.
+		  (ii).Enter Customer Name.
+		 (iii).Enter Customer Customer No.
+		  
+		  2.(i).Enter no customer to booked.
+		   (ii).Enter product name
+		   (iii).Enter product price.
+		   (iv).Enter product quantity.
+  		3.(i).Enter Product Name to check availability
+  
+
+		

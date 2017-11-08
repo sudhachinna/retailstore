@@ -1,0 +1,15 @@
+create table customer10(cust_id number(4),
+						cust_name varchar2(20),
+						mobileno number(10));
+
+create table productinvoice(invoice_id number(4),
+							product_id number(4),
+							product_name varchar(20),
+							quantity number(4),
+							price number(6),
+							total number(6));
+
+create table product(pid number(4),
+					p_name varchar2(20),
+					price number(6),
+					qty number(4));
