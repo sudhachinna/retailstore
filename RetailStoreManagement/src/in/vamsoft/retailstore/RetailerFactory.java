@@ -5,8 +5,14 @@ import java.sql.SQLException;
 
 public class RetailerFactory {
   
-  public static RetailsDAO getretail() throws ClassNotFoundException, SQLException, IOException {
-    return new RetailStore();
+  public static RetailsDAO getretail()  {
+    try {
+      return new RetailStore();
+    } catch (ClassNotFoundException | SQLException | IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
     
   }
 

@@ -4,6 +4,9 @@ package in.vamsoft.retailstore;
  * @project name:Retail store Management.
  * @Date :07-nov-2017
  * @ class name is Product
+ * @using constructor.
+ * @using getter and setter.
+ * @using toString.
  */
 public class Product {
   int productID;

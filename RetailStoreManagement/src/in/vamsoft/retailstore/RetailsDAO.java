@@ -2,11 +2,16 @@ package in.vamsoft.retailstore;
 
 import java.sql.SQLException;
 
+/*
+ * @project name is RetailStore Management.
+ * @Interface name is RetailsDAO.
+ * @passing some methods.
+ */
 public interface RetailsDAO {
 
-  public void addCustomer(String name, int contactNo);
+  public boolean addCustomer(String name, int contactNo);
 
-  public void addProduct(String pname, double price, int pquantity);
+  public boolean addProduct(String pname, double price, int pquantity);
 
   public int checkProductAvailability(String productName);
 

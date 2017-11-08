@@ -1,5 +1,12 @@
 package in.vamsoft.retailstore;
-
+/*
+ * @project name is RetailStore Management.
+ * @class name is Customer.
+ * @using some variable:customerId,customerName,contactNumber.
+ * @using constructor.
+ * @using getter and setter.
+ * @using toString.
+ */
 public class Customer {
   int customerID;
   String customerName;

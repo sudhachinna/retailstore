@@ -1,23 +1,23 @@
 package in.vamsoft.retailstore;
 
 import java.io.FileReader;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/*
+ * @project name is RetailStore Management.
+ * @create Database Connection.
+ * @open and close the Database Connection.
+ */
 public class JdbcDaoConnection {
 
   static Connection con;
 
-  /**.
-   * @return.
-   * @throws SQLException.
-   * @throws IOException.
-   * @throws ClassNotFoundException.
-   */
-  public static Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
+   public static Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
     FileReader reader = new FileReader("/home/vamsoft/Desktop/db.properties");
     Properties prop = new Properties();
     prop.load(reader);

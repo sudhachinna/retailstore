@@ -1,5 +1,11 @@
 package in.vamsoft.retailstore;
 
+/*
+ * @Project name is RetailStore Management.
+ * @RetailStore is one of the class.
+ * @RetailStore class is implements RetailsDAO and AutoCloseable.
+ * @Enable Database Connection.
+ */
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -26,8 +32,15 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
   }
 
   public int cid = 2;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see in.vamsoft.retailstore.RetailsDAO#addCustomer(java.lang.String, int)
+   * 
+   * @Using constructer
+   */
 
-  public void addCustomer(String name, int contactNo) {
+  public boolean addCustomer(String name, int contactNo) {
 
     try (PreparedStatement statement = con.prepareStatement("insert into customer10 values(?,?,?)");) {
       statement.setInt(1, cid++);
@@ -35,17 +48,23 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
       statement.setInt(3, contactNo);
 
       int rowsUpdated = statement.executeUpdate();
+      if (rowsUpdated > 0) {
+        return true;
+      } else {
+        return false;
+      }
 
     } catch (SQLException e) {
       e.printStackTrace();
 
     }
+    return false;
 
   }
 
   public static int pid = 2;
 
-  public void addProduct(String productName, double productPrice, int quantity) {
+  public boolean addProduct(String productName, double productPrice, int quantity) {
     try (PreparedStatement statement = con.prepareStatement("insert into product values(?,?,?,?)");) {
       statement.setInt(1, pid++);
       statement.setString(2, productName);
@@ -53,11 +72,17 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
       statement.setInt(4, quantity);
 
       int rowsUpdated = statement.executeUpdate();
+      if (rowsUpdated > 0) {
+        return true;
+      } else {
+        return false;
+      }
 
     } catch (SQLException e) {
       e.printStackTrace();
 
     }
+    return false;
 
   }
 
@@ -86,7 +111,7 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
   public int bookProduct(int customerID, String ProductName, int qtyOfProduct) throws SQLException {
 
     int updateQuantity;
-    System.out.println("RetailStore.bookProduct()");
+
     int available = checkProductAvailability(ProductName);
     System.out.println("Check Condition Excuted");
     if (available >= qtyOfProduct) {
@@ -103,8 +128,8 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
       int price = 0;
       int pid = 0;
       double total = 0;
-      rs=statement2.executeQuery();
-      while(rs.next()) {
+      rs = statement2.executeQuery();
+      while (rs.next()) {
         pid = rs.getInt(1);
         price = rs.getInt(3);
         total = qtyOfProduct * price;
@@ -113,7 +138,7 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
       if (latestUpdate > 0) {
         System.out.println("Database quantity is Updated");
         int inv_id = 1;
-        
+
         try (PreparedStatement statement1 = con.prepareStatement("insert into productinvoice values(?,?,?,?,?,?)");) {
           statement1.setInt(1, inv_id++);
           statement1.setInt(2, pid);
