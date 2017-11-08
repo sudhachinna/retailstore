@@ -11,14 +11,12 @@ public class Product {
   int quatity;
   double productPrice;
 
-  
-  public static int pid = 1;
+  public static int pid = 2;
 
- 
   /*
    * constructor name is product initializes the values.
    */
-  public Product(int productID, String productName, double productPrice,int quatity ) {
+  public Product(int productID, String productName, double productPrice, int quatity) {
     super();
     this.productID = productID;
     this.productName = productName;
@@ -26,17 +24,15 @@ public class Product {
     this.productPrice = productPrice;
   }
 
-  public void addProduct(String productName,double productPrice,int quantity) {
-    Product c = new Product(pid, productName, productPrice,quantity);
-     pid++;
+  public void addProduct(String productName, double productPrice, int quantity) {
+    Product c = new Product(pid, productName, productPrice, quantity);
+    pid++;
 
-   }
-  
+  }
 
-  
   public int checkProductAvailability(String productName) {
-    
-    Product c = new Product(productID, productName, productPrice,quatity);
+
+    Product c = new Product(productID, productName, productPrice, quatity);
 
     return -1;
   }
@@ -45,9 +41,8 @@ public class Product {
     super();
     // TODO Auto-generated constructor stub
   }
-  
 
-   /*
+  /*
    * initializes getter and setter method.
    */
   public int getProductID() {
@@ -81,7 +76,5 @@ public class Product {
   public void setProductPrice(double productPrice) {
     this.productPrice = productPrice;
   }
-  
- 
 
 }

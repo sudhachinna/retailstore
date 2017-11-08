@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import java.io.IOException;
 
 public class RetailStore implements RetailsDAO, AutoCloseable {
@@ -25,7 +25,7 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
     this.storeName = storeName;
   }
 
-  public static int cid = 2;
+  public int cid = 2;
 
   public void addCustomer(String name, int contactNo) {
 
@@ -43,7 +43,7 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
 
   }
 
-  public static int pid = 1;
+  public static int pid = 2;
 
   public void addProduct(String productName, double productPrice, int quantity) {
     try (PreparedStatement statement = con.prepareStatement("insert into product values(?,?,?,?)");) {
@@ -83,9 +83,61 @@ public class RetailStore implements RetailsDAO, AutoCloseable {
 
   }
 
-  public int bookProduct(int customerID, String ProductName, int qtyOfProduct) {
+  public int bookProduct(int customerID, String ProductName, int qtyOfProduct) throws SQLException {
 
-    return 1;
+    int updateQuantity;
+    System.out.println("RetailStore.bookProduct()");
+    int available = checkProductAvailability(ProductName);
+    System.out.println("Check Condition Excuted");
+    if (available >= qtyOfProduct) {
+      System.out.println("The Product Booked");
+      updateQuantity = available - qtyOfProduct;
+      PreparedStatement statement = con.prepareStatement("update product set qty=? where p_name=?");
+      System.out.println("create statement executed");
+
+      statement.setInt(1, updateQuantity);
+      statement.setString(2, ProductName);
+      int latestUpdate = statement.executeUpdate();
+      PreparedStatement statement2 = con.prepareStatement("select * from product where p_name=?");
+      statement2.setString(1, ProductName);
+      int price = 0;
+      int pid = 0;
+      double total = 0;
+      rs=statement2.executeQuery();
+      while(rs.next()) {
+        pid = rs.getInt(1);
+        price = rs.getInt(3);
+        total = qtyOfProduct * price;
+      }
+
+      if (latestUpdate > 0) {
+        System.out.println("Database quantity is Updated");
+        int inv_id = 1;
+        
+        try (PreparedStatement statement1 = con.prepareStatement("insert into productinvoice values(?,?,?,?,?,?)");) {
+          statement1.setInt(1, inv_id++);
+          statement1.setInt(2, pid);
+          statement1.setString(3, ProductName);
+          statement1.setDouble(4, qtyOfProduct);
+          statement1.setInt(5, price);
+          statement1.setDouble(6, total);
+
+          int rowsUpdated = statement1.executeUpdate();
+
+        } catch (SQLException e) {
+          e.printStackTrace();
+
+        }
+
+      } else {
+        System.out.println("The quantity is not updated");
+      }
+
+    } else {
+      System.out.println("The Product is Not Available");
+    }
+    return available;
+
   }
 
   public double calculateNetAmount(int customerID, double Discount) {

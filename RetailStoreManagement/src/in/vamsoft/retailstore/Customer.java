@@ -4,7 +4,7 @@ public class Customer {
   int customerID;
   String customerName;
   int contactNumber;
-  public static int cid = 2;
+  public int cid = 2;
 
   public Customer() {
     super();
@@ -13,6 +13,7 @@ public class Customer {
 
   public void addCustomer(String customerName, int contactNumber) {
     Customer c = new Customer(cid, customerName, contactNumber);
+
     cid++;
 
   }
